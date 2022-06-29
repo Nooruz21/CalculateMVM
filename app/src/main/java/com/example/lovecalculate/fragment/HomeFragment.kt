@@ -13,6 +13,7 @@ import androidx.navigation.fragment.NavHostFragment
 import com.example.lovecalculate.R
 
 import com.example.lovecalculate.databinding.FragmentHomeBinding
+import com.example.lovecalculate.network.model.LoveModel
 
 import com.example.lovecalculate.viewmodel.LoveViewModel
 
