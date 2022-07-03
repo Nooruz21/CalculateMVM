@@ -6,19 +6,22 @@ import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import com.example.lovecalculate.App
 import com.example.lovecalculate.R
+import com.example.lovecalculate.network.LoveApi
 import com.example.lovecalculate.network.model.LoveModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
-class Repository {
+class Repository @Inject constructor(private val api: LoveApi ){
 
     fun getMutableLiveDataOfLoveModel(
         firstName: String,
         secondName: String
     ): MutableLiveData<LoveModel> {
         val liveLoveModel :MutableLiveData<LoveModel> = MutableLiveData()
-        App.loveApi.getPercentage(firstName,secondName).enqueue(object :
+
+        api.getPercentage(firstName,secondName).enqueue(object :
             Callback<LoveModel> {
             override fun onResponse(call: Call<LoveModel>, response: Response<LoveModel>) {
                 response.body()?.let {

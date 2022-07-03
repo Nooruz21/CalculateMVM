@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.example.lovecalculate.databinding.FragmentSecondBinding
+import com.example.lovecalculate.network.model.LoveModel
 
 
 class SecondFragment : Fragment() {
@@ -36,18 +38,18 @@ class SecondFragment : Fragment() {
     }
 
     private fun argumentsAndSet() {
-        val firstName = arguments?.getString("firstName")
-        val secondName = arguments?.getString("secondName")
-        val percent = arguments?.getString("percentage")
-        val result = arguments?.getString("result")
-
-
-        binding.firstName.text = firstName
-        binding.secondName.text = secondName
-        binding.percent.text = "$percent%"
-        binding.result.text = result
+        val love = arguments?.getSerializable("love") as LoveModel
+        with(binding) {
+            firstName.text = love.firstName
+            secondName.text = love.secondName
+            result.text = love.result
+            percent.text = love.percentage.plus("%")
+            tryAgainBtn.setOnClickListener {
+                findNavController().navigateUp()
+            }
+        }
+    }
 
     }
 
 
-}

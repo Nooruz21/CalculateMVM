@@ -10,18 +10,24 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.example.lovecalculate.R
+import com.example.lovecalculate.Utils
 
 import com.example.lovecalculate.databinding.FragmentHomeBinding
 import com.example.lovecalculate.network.model.LoveModel
 
 import com.example.lovecalculate.viewmodel.LoveViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var navController: NavController
     val viewModel: LoveViewModel by viewModels()
+    @Inject
+    lateinit var utils: Utils
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,17 +49,18 @@ class HomeFragment : Fragment() {
                 val firstName = firstEd.text.toString()
                 val secondName = secondEd.text.toString()
                 viewModel.getLiveLoveModel(firstName, secondName)
-                    .observe(viewLifecycleOwner, Observer {
-                        Log.e("ololo", "initClickers:$it")
-                        val bundle = Bundle()
+                    .observe(viewLifecycleOwner) { loveModel->
+                        utils.showToast(requireContext(),loveModel.result)
 
-                        bundle.putString("firstName", firstName)
-                        bundle.putString("secondName", secondName)
-                        bundle.putString("percentage","" )
-                        bundle.putString("result", "")
+                        val love = it
+                        val bundle = Bundle()
+                        bundle.putSerializable("love", love)
+                        findNavController().navigate(R.id.secondFragment, bundle)
+                        firstEd.text.clear()
+                        secondEd.text.clear()
 
                         navController.navigate(R.id.secondFragment, bundle)
-                    })
+                    }
             }
         }
     }}

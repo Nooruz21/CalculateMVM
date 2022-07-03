@@ -15,4 +15,9 @@
         android:name="com.example.lovecalculate.fragment.SecondFragment"
         android:label="fragment_second"
         tools:layout="@layout/fragment_second" />
+    <fragment
+        android:id="@+id/boardFragment"
+        android:name="com.example.lovecalculate.fragment.BoardFragment"
+        android:label="fragment_board"
+        tools:layout="@layout/fragment_board" />
 </navigation>
