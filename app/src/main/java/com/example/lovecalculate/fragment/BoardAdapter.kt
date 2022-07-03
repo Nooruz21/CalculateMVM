@@ -8,13 +8,17 @@ import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lovecalculate.Board
 import com.example.lovecalculate.Prefs.Prefs
-import com.example.lovecalculate.R
 import com.example.lovecalculate.databinding.ItemBoardBinding
+import javax.inject.Inject
+
 
 class BoardAdapter(val context: Context, val navController: NavController) :
     RecyclerView.Adapter<BoardAdapter.BoardViewHolder>() {
 
     private val data = arrayListOf<Board>()
+
+    @Inject
+    var prefs: Prefs? = null
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BoardViewHolder {
@@ -49,7 +53,7 @@ class BoardAdapter(val context: Context, val navController: NavController) :
                 binding.btnStart.visibility = View.INVISIBLE
             }
             binding.btnStart.setOnClickListener {
-                Prefs(context).saveState()
+                prefs?.saveState()
                 navController.navigateUp()
             }
         }

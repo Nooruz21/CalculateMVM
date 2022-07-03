@@ -1,23 +1,27 @@
 package com.example.lovecalculate.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.viewpager2.widget.ViewPager2
 import com.example.lovecalculate.Board
 import com.example.lovecalculate.Prefs.Prefs
 import com.example.lovecalculate.R
 import com.example.lovecalculate.databinding.FragmentBoardBinding
+import javax.inject.Inject
 
 
 class BoardFragment : Fragment() {
 
     private lateinit var binding: FragmentBoardBinding
     private lateinit var adapter: BoardAdapter
+
+    @Inject
+    var prefs: Prefs? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,7 +62,7 @@ class BoardFragment : Fragment() {
         adapter.addItem(Board(R.raw.board_love4, "", "It's Fans and Many more"))
 
         binding.textSkip.setOnClickListener {
-            Prefs(requireContext()).saveState()
+            prefs?.saveState()
             findNavController().navigateUp()
         }
     }
