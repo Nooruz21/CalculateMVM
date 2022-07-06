@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         prefs?.saveState();
 
 
-        if (!Prefs(this).isShown()) {
+        if (!prefs?.isShown()!!) {
             navController.navigate(R.id.boardFragment)
         }
     }

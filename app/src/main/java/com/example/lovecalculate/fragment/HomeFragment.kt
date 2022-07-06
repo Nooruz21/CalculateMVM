@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import com.example.lovecalculate.App
 import com.example.lovecalculate.R
 import com.example.lovecalculate.Utils
 
@@ -26,6 +27,7 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var navController: NavController
     val viewModel: LoveViewModel by viewModels()
+
     @Inject
     lateinit var utils: Utils
 
@@ -49,8 +51,9 @@ class HomeFragment : Fragment() {
                 val firstName = firstEd.text.toString()
                 val secondName = secondEd.text.toString()
                 viewModel.getLiveLoveModel(firstName, secondName)
-                    .observe(viewLifecycleOwner) { loveModel->
-                        utils.showToast(requireContext(),loveModel.result)
+                    .observe(viewLifecycleOwner) { loveModel ->
+                        Log.e("ololo", "network:$loveModel")
+                        App.db.historyDao().insert(loveModel)
 
                         val love = it
                         val bundle = Bundle()
@@ -61,10 +64,13 @@ class HomeFragment : Fragment() {
 
                         navController.navigate(R.id.secondFragment, bundle)
                     }
+                historyBtn.setOnClickListener {
+                    findNavController().navigate(R.id.action_homeFragment_to_historyFragment)
+                }
             }
         }
-    }}
-
+    }
+}
 
 
 /*  App.loveApi.getPercentage(firstName, secondName).enqueue(object :

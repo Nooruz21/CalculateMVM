@@ -32,7 +32,7 @@ class SecondFragment : Fragment() {
     }
 
     private fun initClick() {
-        binding.tryAgainBtn.setOnClickListener{
+        binding.tryAgainBtn.setOnClickListener {
             navController.navigateUp()
         }
     }
@@ -50,6 +50,6 @@ class SecondFragment : Fragment() {
         }
     }
 
-    }
+}
 
 

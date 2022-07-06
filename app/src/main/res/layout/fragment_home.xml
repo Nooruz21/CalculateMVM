@@ -60,4 +60,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:text="@string/next"
         android:textSize="24sp" />
+    <Button
+        app:layout_constraintTop_toBottomOf="@id/okBtn"
+        android:id="@+id/historyBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="history"
+        android:textSize="24sp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
