@@ -12,7 +12,7 @@ interface HistoryDao {
     fun insert(model: LoveModel)
 
 
-@Query("SELECT * FROM love_model ORDER BY id ASC")
+@Query("SELECT * FROM love_model ORDER BY firstName ASC")
     fun  getAll():LiveData<List<LoveModel>>
 
 

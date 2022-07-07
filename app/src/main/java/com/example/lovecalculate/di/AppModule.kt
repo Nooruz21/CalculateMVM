@@ -36,22 +36,20 @@ class AppModule {
 
     @Provides
     fun providePrefs(): Prefs {
-        return Prefs()
+        return  Prefs()
     }
 
-        @Provides
-        fun  provideAppDataBase(@ApplicationContext context: Context) : AppDataBase {
-            return Room.databaseBuilder(context,AppDataBase::class.java ,"database").
-            allowMainThreadQueries().fallbackToDestructiveMigration().build()
+    @Provides
+    fun provideAppDataBase(@ApplicationContext context: Context): AppDataBase {
+        return Room.databaseBuilder(context, AppDataBase::class.java, "database")
+            .allowMainThreadQueries().fallbackToDestructiveMigration().build()
 
-        }
+    }
 
     @Provides
     fun provideHistoryDao(appDataBase: AppDataBase): HistoryDao {
         return appDataBase.historyDao()
     }
-
-
 
 
 }
